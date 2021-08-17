@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE tiles-definitions PUBLIC
+  "-//Apache Software Foundation//DTD Tiles Configuration 3.0//EN"
+  "http://tiles.apache.org/dtds/tiles-config_3_0.dtd">
+<tiles-definitions>
+	  <definition name="/board/main" extends="baseLayout">
+         <put-attribute name="title" value="질문메인" />
+         <put-attribute name="body" value="/WEB-INF/views/board/main.jsp" />
+      </definition>  
+      
+	  <definition name="/board/bList" extends="baseLayout">
+         <put-attribute name="title" value="질문 리스트" />
+         <put-attribute name="body" value="/WEB-INF/views/board/bList.jsp" />
+      </definition>  
+      
+      <definition name="/board/bUpdate" extends="baseLayout">
+         <put-attribute name="title" value="질문수정" />
+         <put-attribute name="body" value="/WEB-INF/views/board/bUpdate.jsp" />
+      </definition>
+
+      <definition name="/board/bUpdatePro" extends="baseLayout">
+         <put-attribute name="title" value="수정작업" />
+         <put-attribute name="body" value="/WEB-INF/views/board/bUpdatePro.jsp" />
+      </definition>
+
+      <definition name="/board/bWrite" extends="baseLayout">
+         <put-attribute name="title" value="질문작성" />
+         <put-attribute name="body" value="/WEB-INF/views/board/bWrite.jsp" />
+      </definition>
+
+      <definition name="/board/bInfo" extends="baseLayout">
+         <put-attribute name="title" value="질문자세히보기" />
+         <put-attribute name="body" value="/WEB-INF/views/board/bInfo.jsp" />
+      </definition>
+  
+</tiles-definitions>
+
+

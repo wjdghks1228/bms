@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+		"http://mybatis.org/dtd/mybatis-3-mapper.dtd"> <!--mapper임을 명시하기 위한 DTD 선언 -->
+
+<!-- namespace는 중복되지 않고 고유해야'만' 한다. -->
+<mapper namespace="com.bms.mapper.BoardMapper">
+	<!-- all list from DB -->
+	<select id="getAllBoard" resultType="com.bms.board.dto.BoardDTO">
+		 <![CDATA[
+		SELECT
+				*
+		FROM
+				BOARD
+		  ]]>
+	</select>
+	<!-- 하나만 조회 -->
+	<select id="getOneBoard" parameterType="int" resultType="com.bms.board.dto.BoardDTO">
+		 <![CDATA[
+		SELECT
+				*
+		FROM
+				BOARD
+		WHERE
+				NUM=#{num}
+		  ]]>
+	</select>
+	
+	<insert id="insertBoard" parameterType="com.bms.board.dto.BoardDTO">
+<!-- 
+		INSERT INTO BOARD (
+			WRITER,
+			EMAIL,
+			SUBJECT,
+			PASSWORD,
+			REG_DATE,
+			READ_COUNT,
+			CONTENT)
+		VALUES (
+			#{writer},
+			#{email},
+			#{subject},
+			#{password},
+			now(),
+			#{readCount},
+			#{content} )
+
+			INSERT INTO BOARD VALUES(
+				#{writer},
+				#{email},
+				#{subject},
+				#{password},
+				SYSDATE,
+				#{readCount},
+				#{content}
+			)
+ -->
+ 		<selectKey resultType="int" keyProperty="num" order="BEFORE">
+	    	SELECT 
+	    			BOARD_NUM.NEXTVAL 
+	    	FROM 
+	    			DUAL
+	    </selectKey>
+			INSERT INTO BOARD(
+				NUM,
+				WRITER,
+				EMAIL,
+				SUBJECT,
+				PASSWORD,
+				REG_DATE,
+				READ_COUNT,
+				CONTENT
+			)
+			VALUES(
+				#{num},
+				#{writer},
+				#{email},
+				#{subject},
+				#{password},
+				SYSDATE,
+				#{readCount},
+				#{content}
+			)
+	</insert>
+	
+	<update id="increaseReadCount" parameterType="int">
+		<![CDATA[
+		UPDATE BOARD SET
+			READ_COUNT = READ_COUNT + 1
+		WHERE
+			NUM=#{num}
+		  ]]>
+	</update>
+	
+	<select id="validateUserCheck" parameterType="com.bms.board.dto.BoardDTO" resultType="com.bms.board.dto.BoardDTO">
+		<![CDATA[
+		SELECT 
+				*
+		FROM
+				BOARD
+		WHERE
+				NUM=#{num} AND PASSWORD=#{password}
+		  ]]>
+	</select>
+	
+	<update id="updateBoard" parameterType="com.bms.board.dto.BoardDTO">
+	<![CDATA[
+		UPDATE BOARD SET
+			SUBJECT=#{subject},
+			CONTENT=#{content}
+		WHERE
+			NUM=#{num}
+		  ]]>
+	</update>
+	
+	<delete id="deleteBoard" parameterType="int">
+	<![CDATA[
+		DELETE FROM
+				BOARD
+		WHERE 
+				NUM=#{num}
+		  ]]>
+	</delete>
+</mapper>
+
+
+
+
+
